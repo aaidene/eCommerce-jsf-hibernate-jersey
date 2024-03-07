@@ -4,36 +4,55 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-@Table(name="user")
+@Table(name = "user")
+@NamedQueries({
+	@NamedQuery(name = "User:findAll", query = "SELECT u FROM User u"),
+	@NamedQuery(name = "User:findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")	
+})
 public class User {
-    @Id
-    @Column (name="nom", nullable = false,length = 32)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name = "nom", nullable = false, length = 32)
 	private String nom;
-    
-    @Column (name="prenom", nullable = false,length = 32)
+	
+	@Column(name = "prenom", nullable = false, length = 32)
 	private String prenom;
-    
-    @Column (name="email", nullable = false,length = 32, unique = true)
+	
+	@Column(name = "email", nullable = false, length = 32, unique = true)
 	private String email;
-    
-    @Column (name="password", nullable = false,length = 32)
+	
+	@Column(name = "password", nullable = false, length = 32)
 	private String password;
-    
-    @Column (name="telephone", nullable = true,length = 32)
+
+	@Column(name = "telephone", nullable = true, length = 14)
 	private String telephone;
 	
-    @Column (name="dateNaissance", nullable = false)
-    @Temporal(TemporalType.DATE)
+	@Column(name = "date_naissance", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 	
 	public User() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -86,8 +105,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password=" + password
+		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password=" + password
 				+ ", telephone=" + telephone + ", dateNaissance=" + dateNaissance + "]";
 	}
-	
+
 }

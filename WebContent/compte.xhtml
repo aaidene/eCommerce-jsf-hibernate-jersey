@@ -81,11 +81,9 @@
 					</h:panelGroup>
 					<p></p>
 					<h:panelGroup>
-						<h:panelGrid id="panelGroupValider" columns="3" cellpadding = "0" cellspacing = "2">
-							<h:outputText value="" />
-							<h:commandButton id="btnCreerCompte" action="#{userbean.addUser()}" value="Valider" />
-							<h:outputText value="#{userbean.message}" style="color:green"/>
-						</h:panelGrid>
+						<h:commandButton id="btnCreerCompte" action="#{userbean.addUser()}" value="Valider" />
+						<h:outputText value="#{userbean.messageError}" style="color:red"/>
+						<h:outputText value="#{userbean.messageSuccess}" style="color:green"/>
 					</h:panelGroup>
 					
 					<h:panelGroup>

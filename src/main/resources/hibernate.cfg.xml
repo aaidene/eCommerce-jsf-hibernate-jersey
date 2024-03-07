@@ -18,6 +18,9 @@
 		<property name="connection.pool_size">3</property>
 		<property name="hibernate.charSet">UTF-8</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<mapping class="fr.greta.ecommerce.entity.User"/>
+		
 	</session-factory>
 	
 </hibernate-configuration>

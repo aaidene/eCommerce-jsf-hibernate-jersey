@@ -3,7 +3,7 @@
     
     
     
-    <wb-module deploy-name="eCommerce-1.0">
+    <wb-module deploy-name="eCommerce_V2-1.0">
                                         
         
         
@@ -24,13 +24,14 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
                                         
         
         
         
         <property name="java-output-path" value="/eCommerce/build/classes"/>
                 
-        <property name="context-root" value="eCommerce"/>
+        <property name="context-root" value="eCommerce_V2"/>
                                     
     
     

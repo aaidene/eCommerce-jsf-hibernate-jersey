@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.greta.ecommerce.entity.User;
+import fr.greta.ecommerce.metier.UserMetier;
 import fr.greta.ecommerce.utils.Dates;
 
 @ManagedBean(name = "userbean")
@@ -24,17 +25,15 @@ public class UserBean {
 	private String telephone;
 	private String dateNaissance;
 	
-	private String message;
+	private String messageError;
+	private String messageSuccess;
 
-	private static List<User> users;
-	
 	public UserBean() {
-		users = new ArrayList<>();
-		message = "";
+		messageError = messageSuccess = "";
 	}
 
 	public String addUser() {
-		message = "";
+		messageError = messageSuccess = "";
 		User user = new User();
 		user.setNom(nom);
 		user.setPrenom(prenom);
@@ -43,15 +42,29 @@ public class UserBean {
 		user.setTelephone(telephone);
 		user.setDateNaissance(Dates.convertStringToDate(dateNaissance));
 		
-		users.add(user);
+		UserMetier userMetier = new UserMetier();
+		try {
+			userMetier.addUser(user);
+			messageSuccess = "L'utilisateur a bien été crée.";
+			nom = prenom = email = password = telephone = dateNaissance = "";
+		} catch (Exception e) {
+			messageError = "Erreur lors de la création de l'utilisateur\n"
+					+ "+ ERROR : " + e.getMessage();
+		}
+		return "";
 		
-		nom = prenom = email = password = telephone = dateNaissance = "";
-		message = "L'utilisateur a bien été crée.";
-		
-		return "login";
 	}
 	
 	public List<User> getUsers() {
+		messageError = messageSuccess = "";
+		UserMetier userMetier = new UserMetier();
+		List<User> users = new ArrayList<>();
+		try {
+			users = userMetier.getUsers();
+		} catch (Exception e) {
+			messageError = "Erreur lors de la récupération de la liste des utilisateurs\n"
+			+ "+ ERROR : " + e.getMessage();
+		}
 		return users;
 	}
 	
@@ -103,12 +116,20 @@ public class UserBean {
 		this.dateNaissance = dateNaissance;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getMessageError() {
+		return messageError;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMessageError(String messageError) {
+		this.messageError = messageError;
 	}
-	
+
+	public String getMessageSuccess() {
+		return messageSuccess;
+	}
+
+	public void setMessageSuccess(String messageSuccess) {
+		this.messageSuccess = messageSuccess;
+	}
+
 }
