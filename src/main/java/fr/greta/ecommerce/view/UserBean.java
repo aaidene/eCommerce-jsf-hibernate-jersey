@@ -25,26 +25,75 @@ public class UserBean {
 	private String password;
 	private String telephone;
 	private String dateNaissance;
-	
+
 	private String messageError;
 	private String messageSuccess;
+	private List<String> langages;
+	private String pays;
+	private String ville; // c'est pas une listes parce que 1
 
+	private List<String> langagesProposes = Arrays.asList("php", "java", "python");
+
+	public List<String> getAllPays() {
+		return Arrays.asList("France", "Belgique");
+	}
+
+	
+	public User getUserByEmail(String email) {
+	    UserMetier userMetier = new UserMetier();
+	    try {
+	        return userMetier.getUserByEmail(email);
+	    } catch (Exception e) {
+	        
+	        e.printStackTrace();
+	        return null; 
+	    }
+	}
+	
+	
+	public List<String> getAllVilles() {
+		if (pays == null) {
+
+			return new ArrayList<String>();
+		}
+
+		switch (pays) {
+		case "France":
+			return Arrays.asList("Paris", "Marseille", "Lyon");
+		case "Belgique":
+			return Arrays.asList("Bruxelles", "Anvers", "Gand");
+		default:
+			return new ArrayList<>();
+		}
+	}
+
+	public void changerPays() {
+	}
 
 	public UserBean() {
 		messageError = messageSuccess = "";
 	}
 
+	public String loginUser() {
+	    messageError = messageSuccess = "";
+
+	    if (email.equals("teste@example.com") && password.equals("test")) {
+	        messageSuccess = "Bravo";
+	    } else {
+	        messageError = "Email ou mot de passe incorrect !";
+	    }
+        return "";
+	}
+
 	public String addUser() {
 		messageError = messageSuccess = "";
-		
-		if ( !password.equals(passwordConfirmation)) {
-			
+
+		if (!password.equals(passwordConfirmation)) {
+
 			messageError = "Les deux mot mot de passe doivent se correcpondre  ";
 			return "";
-			
+
 		}
-		
-		
 
 		User user = new User();
 		user.setNom(nom);
@@ -53,20 +102,24 @@ public class UserBean {
 		user.setPassword(password);
 		user.setTelephone(telephone);
 		user.setDateNaissance(Dates.convertStringToDate(dateNaissance));
-		
+
 		UserMetier userMetier = new UserMetier();
 		try {
 			userMetier.addUser(user);
 			messageSuccess = "L'utilisateur a bien été crée.";
 			nom = prenom = email = password = telephone = dateNaissance = "";
 		} catch (Exception e) {
-			messageError = "Erreur lors de la création de l'utilisateur\n"
-					+ "+ ERROR : " + e.getMessage();
+			messageError = "Erreur lors de la création de l'utilisateur\n" + "+ ERROR : " + e.getMessage();
 		}
 		return "";
-		
+
 	}
 	
+	
+	
+	
+	
+
 	public List<User> getUsers() {
 		messageError = messageSuccess = "";
 		UserMetier userMetier = new UserMetier();
@@ -74,12 +127,12 @@ public class UserBean {
 		try {
 			users = userMetier.getUsers();
 		} catch (Exception e) {
-			messageError = "Erreur lors de la récupération de la liste des utilisateurs\n"
-			+ "+ ERROR : " + e.getMessage();
+			messageError = "Erreur lors de la récupération de la liste des utilisateurs\n" + "+ ERROR : "
+					+ e.getMessage();
 		}
 		return users;
 	}
-	
+
 	public String getNom() {
 		return nom;
 	}
@@ -112,8 +165,6 @@ public class UserBean {
 		this.password = password;
 	}
 
-	
-	
 	public String getPasswordConfirmation() {
 		return passwordConfirmation;
 	}
@@ -153,7 +204,37 @@ public class UserBean {
 	public void setMessageSuccess(String messageSuccess) {
 		this.messageSuccess = messageSuccess;
 	}
-	
-	
+
+	public List<String> getLangages() {
+		return langages;
+	}
+
+	public void setLangages(List<String> langages) {
+		this.langages = langages;
+	}
+
+	public List<String> getLangagesProposes() {
+		return langagesProposes;
+	}
+
+	public void setLangagesProposes(List<String> langagesProposes) {
+		this.langagesProposes = langagesProposes;
+	}
+
+	public String getPays() {
+		return pays;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 
 }

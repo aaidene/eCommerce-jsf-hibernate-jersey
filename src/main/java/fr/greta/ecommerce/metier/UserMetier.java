@@ -23,4 +23,9 @@ public class UserMetier {
 		UserDao userDao = new UserDao();
 		return userDao.getUsers();
 	}
+
+	public User getUserByEmail(String email) throws Exception {
+	    UserDao userDao = new UserDao();
+	    return userDao.getUserByEmail(email);
+	}
 }

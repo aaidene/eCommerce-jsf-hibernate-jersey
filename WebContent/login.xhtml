@@ -10,8 +10,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<h:outputStylesheet library="css" name="common-style.css"></h:outputStylesheet>
-	<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
-	<title>Insert title here</title>
+	<title>Page de Connexion</title>
 </h:head>
 
 <h:body>
@@ -19,7 +18,20 @@
 		<ui:define name="content">
 			<f:view>
 				<h:form>
-					<h1>Page de Login</h1>
+					<h1>Page de Connexion</h1>
+					
+					<h:panelGrid columns="2">
+						<h:outputLabel for="email" value="Email:" />
+						<h:inputText id="email" value="#{userbean.email}" />
+						
+						<h:outputLabel for="password" value="Mot de passe:" />
+						<h:inputSecret id="password" value="#{userbean.password}" />
+					</h:panelGrid>
+					
+					<h:commandButton value="Se connecter" action="#{userbean.loginUser()}"  />
+					
+				<h:outputText value="#{userbean.messageError}" style="color:red" />
+				<h:outputText value="#{userbean.messageSuccess}" style="color:green" />
 				</h:form>
 			</f:view>
 		</ui:define>

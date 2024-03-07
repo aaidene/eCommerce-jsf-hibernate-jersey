@@ -26,6 +26,21 @@ public class UserDao {
 			}
 		}
 	}
+	
+	
+	
+	public User getUserByEmail(String email) throws Exception {
+	    Session session = HibernateConnector.getInstance().getSession();
+	    try {
+	        Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+	        query.setParameter("email", email);
+	        return query.uniqueResult();
+	    } finally {
+	        if (session != null && session.isOpen()) {
+	            session.close();
+	        }
+	    }
+	}
 
 	public void addUser(User user) throws Exception {
 

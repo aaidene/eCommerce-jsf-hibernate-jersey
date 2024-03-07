@@ -12,6 +12,21 @@
 	<h:outputStylesheet library="css" name="common-style.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
 	<title>Insert title here</title>
+
+
+	<style>
+/* Style pour le selectManyListbox */
+#langages {
+	width: 200px; /* Largeur du selectManyListbox */
+	height: 150px; /* Hauteur du selectManyListbox */
+}
+
+/* Style pour le selectOneMenu */
+#pays, #villes {
+	width: 200px; /* Largeur du selectOneMenu */
+	margin-bottom: 10px; /* Marge en bas pour l'espacement */
+}
+</style>
 </h:head>
 
 <h:body>
@@ -20,117 +35,163 @@
 			<f:view>
 				<h:form>
 					<h:panelGroup>
-						<h:panelGrid id="panelGroupCompte" columns="3" cellpadding = "0" cellspacing = "2">
+						<h:panelGrid id="panelGroupCompte" columns="3" cellpadding="0"
+							cellspacing="2">
 							<h:outputText value="Nom :" />
-							<h:inputText id="nom" size="20" required="true" value="#{userbean.nom}"
-										requiredMessage="Le nom est obligatoire !" 
-										validatorMessage="Le nom doit respecter le format suivant : 2 catractères min, 20 caractères max, les caractères suivants :
+							<h:inputText id="nom" size="20" required="true"
+								value="#{userbean.nom}"
+								requiredMessage="Le nom est obligatoire !"
+								validatorMessage="Le nom doit respecter le format suivant : 2 catractères min, 20 caractères max, les caractères suivants :
 										a:z, A:Z, -, ' ', éèçiïî'">
 								<f:validateLength minimum="2" maximum="20"></f:validateLength>
 								<f:validateRegex pattern="^[^ ][a-zA-Z '\-éèêëçäà]*[^ ]$"></f:validateRegex>
 							</h:inputText>
-							<h:message for="nom" style="color:red"/>
-							
+							<h:message for="nom" style="color:red" />
+
 							<h:outputText value="Prénom :" />
-							<h:inputText id="prenom" size="20" required="true" value="#{userbean.prenom}"
-										requiredMessage="Le prénom est obligatoire !" 
-										validatorMessage="Le prénom ne doit être composé que des caractères suivants :
+							<h:inputText id="prenom" size="20" required="true"
+								value="#{userbean.prenom}"
+								requiredMessage="Le prénom est obligatoire !"
+								validatorMessage="Le prénom ne doit être composé que des caractères suivants :
 										a:z, A:Z, -, ' ', éèçiïî'">
 								<f:validateLength minimum="2" maximum="20"></f:validateLength>
 								<f:validateRegex pattern="^[^ ][a-zA-Z '\-éèêëçäà]*[^ ]$"></f:validateRegex>
 							</h:inputText>
-							<h:message for="prenom" style="color:red"/>
-							
+							<h:message for="prenom" style="color:red" />
+
 							<h:outputText value="Email :" />
-							<h:inputText id="email" size="32" required="true" value="#{userbean.email}"
-										requiredMessage="L'email est obligatoire !" 
-										validatorMessage="L'email doit respecter le format suivant : XX@YY.ZZ">
+							<h:inputText id="email" size="32" required="true"
+								value="#{userbean.email}"
+								requiredMessage="L'email est obligatoire !"
+								validatorMessage="L'email doit respecter le format suivant : XX@YY.ZZ">
 								<f:validateLength minimum="8" maximum="32"></f:validateLength>
-								<f:validateRegex pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"></f:validateRegex>
+								<f:validateRegex
+									pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"></f:validateRegex>
 							</h:inputText>
-							<h:message for="email" style="color:red"/>
-							
+							<h:message for="email" style="color:red" />
+
 							<h:outputText value="Mot de passe :" />
-							<h:inputSecret id="password" size="32" required="true" value="#{userbean.password}"
-										requiredMessage="Le mot de passe est obligatoire !" 
-										validatorMessage="Le mot de passe ne doit être composé ">
+							<h:inputSecret id="password" size="32" required="true"
+								value="#{userbean.password}"
+								requiredMessage="Le mot de passe est obligatoire !"
+								validatorMessage="Le mot de passe ne doit être composé ">
 								<f:validateLength minimum="4" maximum="32"></f:validateLength>
-	<!-- 							<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{12,32}$"></f:validateRegex> -->
+								<!-- 							<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{12,32}$"></f:validateRegex> -->
 							</h:inputSecret>
-							<h:message for="password" style="color:red"/>
-							
+							<h:message for="password" style="color:red" />
+
 							<h:outputText value="confirmation  :" />
-							<h:inputSecret id="passwordConfirmation" size="32" required="true" value="#{userbean.passwordConfirmation}"
-										requiredMessage="Le mot de passe de confirmation  est obligatoire !" 
-										validatorMessage="Le mot de passe de confirmation ne doit être composé ">
+							<h:inputSecret id="passwordConfirmation" size="32"
+								required="true" value="#{userbean.passwordConfirmation}"
+								requiredMessage="Le mot de passe de confirmation  est obligatoire !"
+								validatorMessage="Le mot de passe de confirmation ne doit être composé ">
 								<f:validateLength minimum="4" maximum="32"></f:validateLength>
-	<!-- 							<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{12,32}$"></f:validateRegex> -->
+								<!-- 							<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{12,32}$"></f:validateRegex> -->
 							</h:inputSecret>
-							<h:message for="password" style="color:red"/>
-							
+							<h:message for="password" style="color:red" />
+
 							<h:outputText value="Téléphone :" />
-							<h:inputText id="telephone" size="14" required="true" value="#{userbean.telephone}"
-										requiredMessage="Le téléphone est obligatoire !" 
-										validatorMessage="Le téléphone doit être au format +XXXYYYYYYYYY ou 00XXXYYYYYYYYY ou 0YYYYYYYYY">
+							<h:inputText id="telephone" size="14" required="true"
+								value="#{userbean.telephone}"
+								requiredMessage="Le téléphone est obligatoire !"
+								validatorMessage="Le téléphone doit être au format +XXXYYYYYYYYY ou 00XXXYYYYYYYYY ou 0YYYYYYYYY">
 								<f:validateLength minimum="10" maximum="14"></f:validateLength>
 								<f:validateRegex pattern="^\+?[0-9][0-9]{7,14}$"></f:validateRegex>
 							</h:inputText>
-							<h:message for="telephone" style="color:red"/>
-							
+							<h:message for="telephone" style="color:red" />
+
 							<h:outputText value="Date de naissance :" />
-							<h:inputText id="dateNaissance" size="10" required="true" value="#{userbean.dateNaissance}"
-										requiredMessage="La date de naissance est obligatoire !" 
-										validatorMessage="La date de naissance doit respecter le format dd/MM/YYYY">
+							<h:inputText id="dateNaissance" size="10" required="true"
+								value="#{userbean.dateNaissance}"
+								requiredMessage="La date de naissance est obligatoire !"
+								validatorMessage="La date de naissance doit respecter le format dd/MM/YYYY">
 								<f:validateLength minimum="10" maximum="10"></f:validateLength>
-<!-- 								<f:validateRegex pattern="^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$"></f:validateRegex> -->
-<!-- 								<f:convertDateTime  pattern="dd-mm-yyyy" locale="fr_FR"/> -->
+								<!-- 								<f:validateRegex pattern="^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$"></f:validateRegex> -->
+								<!-- 								<f:convertDateTime  pattern="dd-mm-yyyy" locale="fr_FR"/> -->
 							</h:inputText>
-							<h:message for="dateNaissance" style="color:red"/>
+							<h:message for="dateNaissance" style="color:red" />
+
+							<h:outputText value="langages :" />
+							<h:selectManyListbox id="langages" value="#{userbean.langages}">
+								<f:selectItems id="itemsLangages"
+									value="#{userbean.langagesProposes}" var="l" itemLabel="#{l}"
+									itemValue="#{l}" />
+							</h:selectManyListbox>
+							<h:message for="langages" style="color:red" />
+
+							<h:outputText value="Pays :" />
+							<h:selectOneMenu id="pays" value="#{userbean.pays}"
+								style="min-width: 120 px" onchange="submit()" immediate="true"
+								onselect="userbean.changerPays()">
+								<f:selectItems id="itemsPays" value="#{userbean.getAllPays()}"
+									var="p" itemLabel="#{p}" itemValue="#{p}" />
+							</h:selectOneMenu>
+							<h:message for="pays" style="color:red" />
+
+
+							<h:outputText value="Ville :" />
+							<h:selectOneMenu id="ville" value="#{userbean.ville}"
+								style="min-width: 120 px">
+								<f:selectItems id="itemsVilles"
+									value="#{userbean.getAllVilles()}" var="v" itemLabel="#{v}"
+									itemValue="#{v}" />
+							</h:selectOneMenu>
+							<h:message for="ville" style="color:red" />
+
 						</h:panelGrid>
 					</h:panelGroup>
 					<p></p>
 					<h:panelGroup>
-						<h:commandButton id="btnCreerCompte" action="#{userbean.addUser()}" value="Valider" />
-						<h:outputText value="#{userbean.messageError}" style="color:red"/>
-						<h:outputText value="#{userbean.messageSuccess}" style="color:green"/>
+						<h:commandButton id="btnCreerCompte"
+							action="#{userbean.addUser()}" value="Valider" />
+						<h:commandButton id="btnretour" value="Retour" outcome="index" />
+
+						<h:panelGroup>
+							<h:outputText value="#{userbean.messageError}" style="color:red" />
+							<h:outputText value="#{userbean.messageSuccess}"
+								style="color:green" />
+						</h:panelGroup>
 					</h:panelGroup>
-					
+
+
+
+
 					<h:panelGroup>
 						<h4>Liste des utilisateurs</h4>
 						<h:dataTable id="dataTable" value="#{userbean.getUsers()}" var="u"
-								styleClass="order-table" headerClass="order-table-header"
-								rowClasses="order-table-odd-row, order-table-even-row">
-						
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row, order-table-even-row">
+
 							<h:column>
 								<f:facet name="header">Nom</f:facet>
 								<h:outputText value="#{u.nom}" />
 							</h:column>
-							
+
 							<h:column>
 								<f:facet name="header">Prénom</f:facet>
 								<h:outputText value="#{u.prenom}" />
 							</h:column>
-							
+
 							<h:column>
 								<f:facet name="header">Email</f:facet>
 								<h:outputText value="#{u.email}" />
 							</h:column>
-							
+
 							<h:column>
 								<f:facet name="header">Mot de passe</f:facet>
 								<h:outputText value="#{u.password}" />
 							</h:column>
-							
+
 							<h:column>
 								<f:facet name="header">Téléphone</f:facet>
 								<h:outputText value="#{u.telephone}" />
 							</h:column>
-							
+
 							<h:column>
 								<f:facet name="header">Date de naissance</f:facet>
-								<h:outputText value="#{u.dateNaissance}"/>
+								<h:outputText value="#{u.dateNaissance}" />
 							</h:column>
-							
+
 						</h:dataTable>
 					</h:panelGroup>
 				</h:form>
