@@ -21,6 +21,7 @@ public class UserBean {
 	private String nom;
 	private String prenom;
 	private String email;
+	private String passwordConfirmation;
 	private String password;
 	private String telephone;
 	private String dateNaissance;
@@ -28,12 +29,23 @@ public class UserBean {
 	private String messageError;
 	private String messageSuccess;
 
+
 	public UserBean() {
 		messageError = messageSuccess = "";
 	}
 
 	public String addUser() {
 		messageError = messageSuccess = "";
+		
+		if ( !password.equals(passwordConfirmation)) {
+			
+			messageError = "Les deux mot mot de passe doivent se correcpondre  ";
+			return "";
+			
+		}
+		
+		
+
 		User user = new User();
 		user.setNom(nom);
 		user.setPrenom(prenom);
@@ -100,6 +112,16 @@ public class UserBean {
 		this.password = password;
 	}
 
+	
+	
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}
+
 	public String getTelephone() {
 		return telephone;
 	}
@@ -131,5 +153,7 @@ public class UserBean {
 	public void setMessageSuccess(String messageSuccess) {
 		this.messageSuccess = messageSuccess;
 	}
+	
+	
 
 }

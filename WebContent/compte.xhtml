@@ -59,6 +59,15 @@
 							</h:inputSecret>
 							<h:message for="password" style="color:red"/>
 							
+							<h:outputText value="confirmation  :" />
+							<h:inputSecret id="passwordConfirmation" size="32" required="true" value="#{userbean.passwordConfirmation}"
+										requiredMessage="Le mot de passe de confirmation  est obligatoire !" 
+										validatorMessage="Le mot de passe de confirmation ne doit être composé ">
+								<f:validateLength minimum="4" maximum="32"></f:validateLength>
+	<!-- 							<f:validateRegex pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{12,32}$"></f:validateRegex> -->
+							</h:inputSecret>
+							<h:message for="password" style="color:red"/>
+							
 							<h:outputText value="Téléphone :" />
 							<h:inputText id="telephone" size="14" required="true" value="#{userbean.telephone}"
 										requiredMessage="Le téléphone est obligatoire !" 
